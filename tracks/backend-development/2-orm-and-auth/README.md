@@ -1,4 +1,4 @@
-# Database Integration Level
+# ORM and Authentication
 
 ## Level Overview
 Welcome to the second level of our backend journey! Here we'll learn how to make our applications remember things forever using databases! 🧙‍♂️
