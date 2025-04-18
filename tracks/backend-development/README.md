@@ -24,15 +24,15 @@ By the end of this track, students will be able to:
 3. [E-commerce Full Project](./3-ecommerce-full-project)
 
 ## Duration
-- 12 weeks (recommended)
-- 4 weeks per level
-- 2-3 lessons per week
+- 10 weeks (recommended)
+- 3-5 weeks per level
+- 1 lesson per week
 
 ## Required Tools & Software
 - Node.js (LTS version)
 - VS Code or preferred IDE
 - Postman/Insomnia for API testing
-- PostgreSQL
+- Xampp (for MySQL)
 - Git
 
 ## Learning Path Progression

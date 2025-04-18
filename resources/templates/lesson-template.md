@@ -1,48 +1,86 @@
-# [Lesson Title]
+# [Lesson Title] [Emoji]
 
-## Learning Objectives
-By the end of this lesson, students will be able to:
-- [Objective 1]
-- [Objective 2]
-- [Objective 3]
+## Lesson Overview
 
-## Prerequisites
-- [Prerequisite 1]
-- [Prerequisite 2]
-- [Required tools/software]
+Welcome message explaining the lesson in a fun, engaging way. Use analogies and kid-friendly language to introduce the concepts.
 
-## Lesson Content
+## For Instructors
 
-### 1. [Topic 1]
-[Content for topic 1]
+### Lesson Objectives
 
-```[language]
-# Code example if needed
+Students will learn:
+- [Learning objective 1]
+- [Learning objective 2]
+- [Learning objective 3]
+
+### Teaching Strategy
+
+- [Key teaching approach 1]
+- [Key teaching approach 2]
+- [Key teaching approach 3]
+
+## [Part 1: Main Topic] [Emoji]
+
+### What is [Topic]?
+
+Kid-friendly explanation using analogies. For example:
+- Compare it to something familiar
+- Use real-world examples
+- Make it fun and relatable
+
+### Code Examples
+
+```javascript
+// Code example with fun comments
+const example = 'Make it fun! 🎮';
 ```
 
-### 2. [Topic 2]
-[Content for topic 2]
+### Fun Activity: "[Activity Name]" [Emoji] (optional)
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
 
-### 3. [Topic 3]
-[Content for topic 3]
+## [Part 2: Second Topic] [Emoji]
+
+### Understanding [Topic]
+
+Another kid-friendly explanation with:
+- Simple analogies
+- Clear examples
+- Interactive elements
+
+### Code Examples
+
+```javascript
+// More code examples
+function funExample() {
+    console.log('Learning is fun! 🎨');
+}
+```
+
+### Practice Exercise
+
+```javascript
+// Exercise template
+// Students can fill in the blanks
+```
 
 ## Exercises
-1. [Exercise 1 description]
-2. [Exercise 2 description]
-3. [Exercise 3 description]
+
+### 1. [Exercise Name]
+Description and steps:
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+### 2. [Exercise Name]
+Description and steps:
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
 
 ## Additional Resources
-- [Resource 1 with link]
-- [Resource 2 with link]
-- [Resource 3 with link]
 
-## Teaching Notes
-- [Important teaching point 1]
-- [Common student challenges]
-- [Suggested teaching approach]
-- [Time management tips]
-
-## Assessment Criteria
-- [Criterion 1]
-- [Criterion 2]
-- [Criterion 3]
+- [Resource 1 with description]
+- [Resource 2 with description]
+- [Resource 3 with description]

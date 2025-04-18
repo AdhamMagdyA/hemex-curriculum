@@ -8,7 +8,7 @@
 3. Create level directories as needed
 
 ### Adding a New Level
-1. Create a new directory under the track with format `level-X`
+1. Create a new directory under the track with format `X-name-of-level`
 2. Include a README.md with level objectives
 3. Create lesson directories as needed
 
