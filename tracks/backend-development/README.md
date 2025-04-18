@@ -19,18 +19,14 @@ By the end of this track, students will be able to:
 - Build and deploy full e-commerce solutions
 
 ## Levels
-1. [Node.js Foundations](./1-nodejs-foundations)
-2. [Database Integration with Prisma](./2-database-integration)
-3. [Security & Authentication](./3-security-and-authentication)
-4. [Middleware & API Validation](./4-middleware-and-validation)
-5. [Advanced Database & Access Control](./5-advanced-database)
-6. [E-commerce Project](./6-ecommerce-project)
+1. [Introduction to Backend Development](./1-intro)
+2. [Build Your Node.js Application](./2-build-your-nodejs-app)
+3. [E-commerce Full Project](./3-ecommerce-full-project)
 
 ## Duration
-- 15 weeks (recommended)
-- 3 weeks per level
+- 12 weeks (recommended)
+- 4 weeks per level
 - 2-3 lessons per week
-- Final project: 3 weeks
 
 ## Required Tools & Software
 - Node.js (LTS version)
