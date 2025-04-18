@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const prisma = require('../prisma');
+const prisma = require('../utils/prisma');
 
 class AuthService {
   static async register(userData) {

@@ -1,24 +1,26 @@
 const request = require('supertest');
 const app = require('../src/app');
-const prisma = require('../src/prisma');
+const prisma = require('../src/utils/prisma');
+const bcrypt = require('bcryptjs');
 
 describe('Protected Todo Routes', () => {
   let authToken;
   
   beforeAll(async () => {
-    // Create test user
+    // Create test user with hashed password
+    const hashedPassword = await bcrypt.hash('testpassword', 10);
     await prisma.user.create({
       data: {
         name: 'Test User',
         email: 'test@auth.com',
-        password: 'hashed_password'
+        password: hashedPassword
       }
     });
 
     // Login to get token
     const res = await request(app)
       .post('/auth/login')
-      .send({ email: 'test@auth.com', password: 'hashed_password' });
+      .send({ email: 'test@auth.com', password: 'testpassword' });
       
     authToken = res.body.token;
   });
@@ -26,7 +28,12 @@ describe('Protected Todo Routes', () => {
   it('should reject unauthenticated POST /todos', async () => {
     const res = await request(app)
       .post('/todos')
-      .send({ task: 'Test todo' });
+      .send({ 
+        task: 'Test todo',
+        completed: false
+      });
+    
+    console.log('Test Error:', res.body); // Detailed error logging
     
     expect(res.statusCode).toEqual(401);
   });
@@ -35,13 +42,21 @@ describe('Protected Todo Routes', () => {
     const res = await request(app)
       .post('/todos')
       .set('Authorization', `Bearer ${authToken}`)
-      .send({ task: 'Test todo' });
+      .send({ 
+        task: 'Test todo',
+        completed: false
+      });
+    
+    console.log('Test Error:', res.body); // Detailed error logging
     
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('userId');
+    expect(res.body).toHaveProperty('task');
   });
 
   afterAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE User, Todo RESTART IDENTITY CASCADE;`;
+    // Cleanup
+    await prisma.todo.deleteMany();
+    await prisma.user.deleteMany();
   });
 });

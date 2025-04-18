@@ -22,6 +22,12 @@ curriculum/
 │   │       └── ...
 │   ├── track-2-name/
 │   └── ...
+├── resources/
+│   └── projects/
+│       └── todo/               # Example project with authentication
+│           ├── README.md       # Project documentation
+│           ├── src/            # Source code
+│           └── tests/          # Test cases
 ```
 
 ## Tracks Available
@@ -30,6 +36,15 @@ curriculum/
 - [Frontend Development](./tracks/frontend-development)
 - [Backend Development](./tracks/backend-development)
 - [Software Engineering](./tracks/software-engineering)
+
+## Project Resources
+
+- [Todo API with Authentication](./resources/projects/todo) - A complete example project demonstrating:
+  - REST API development
+  - Database integration with Prisma
+  - JWT authentication
+  - Protected routes
+  - Testing
 
 ## For Instructors
 

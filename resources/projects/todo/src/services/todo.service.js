@@ -1,4 +1,5 @@
 const prisma = require('../utils/prisma');
+const { ValidationError } = require('../errors');
 
 class TodoService {
   // Get all todos (optionally filtered by user)
@@ -15,11 +16,20 @@ class TodoService {
   }
 
   // Create todo (with user relationship)
-  async createTodo(todoData, userId) {
+  async createTodo(todoData) {
+    if (!todoData.task || typeof todoData.task !== 'string') {
+      throw new ValidationError('Task is required and must be a non-empty string');
+    }
+    
+    if (!todoData.userId) {
+      throw new ValidationError('User ID is required');
+    }
+
     return prisma.todo.create({
       data: {
-        ...todoData,
-        userId
+        task: todoData.task,
+        completed: todoData.completed || false,
+        userId: todoData.userId
       }
     });
   }
