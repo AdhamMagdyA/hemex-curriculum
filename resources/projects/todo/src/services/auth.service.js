@@ -4,6 +4,7 @@ const prisma = require('../utils/prisma');
 
 class AuthService {
   static async register(userData) {
+    console.log(userData)
     // Hash password before saving
     const hashedPassword = await this.hashPassword(userData.password);
     return prisma.user.create({

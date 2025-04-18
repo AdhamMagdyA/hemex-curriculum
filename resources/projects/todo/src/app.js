@@ -6,7 +6,16 @@ const errorHandler = require('./middlewares/error.middleware');
 
 const app = express();
 
+// Debug middleware
+app.use((req, res, next) => {
+  console.log('Incoming request:', req.method, req.url);
+  console.log('Headers:', req.headers);
+  console.log('Body:', req.body);
+  next();
+});
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/auth', authRoutes);

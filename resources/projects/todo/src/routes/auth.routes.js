@@ -4,10 +4,13 @@ const router = express.Router();
 
 // Registration route
 router.post('/register', async (req, res, next) => {
+  console.log('Request body:', req.body);
+  
   try {
     const user = await AuthService.register(req.body);
     res.status(201).json(user);
   } catch (error) {
+    console.error('Registration error:', error);
     next(error);
   }
 });
