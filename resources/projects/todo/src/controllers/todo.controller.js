@@ -1,18 +1,20 @@
 const todoService = require('../services/todo.service');
 
-const todoController = {
-  getAllTodos: async (req, res, next) => {
+class TodoController {
+  // Get all todos (optionally filtered by user)
+  async getAll(req, res, next) {
     try {
-      const todos = await todoService.getAllTodos();
+      const todos = await todoService.getAllTodos(req.query.userId);
       res.json(todos);
     } catch (error) {
       next(error);
     }
-  },
+  }
 
-  getTodoById: async (req, res, next) => {
+  // Get todo by ID (optional)
+  async getById(req, res, next) {
     try {
-      const todo = await todoService.getTodoById(req.params.id);
+      const todo = await todoService.getTodoById(parseInt(req.params.id));
       if (!todo) {
         return res.status(404).json({ message: 'Todo not found' });
       }
@@ -20,37 +22,47 @@ const todoController = {
     } catch (error) {
       next(error);
     }
-  },
+  }
 
-  createTodo: async (req, res, next) => {
+  // Create todo (with user relationship)
+  async create(req, res, next) {
     try {
-      const newTodo = await todoService.createTodo(req.body);
-      res.status(201).json(newTodo);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  updateTodo: async (req, res, next) => {
-    try {
-      const updatedTodo = await todoService.updateTodo(req.params.id, req.body);
-      if (!updatedTodo) {
-        return res.status(404).json({ message: 'Todo not found' });
-      }
-      res.json(updatedTodo);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  deleteTodo: async (req, res, next) => {
-    try {
-      await todoService.deleteTodo(req.params.id);
-      res.status(204).end();
+      const todo = await todoService.createTodo(
+        req.body, 
+        req.user?.id // Assuming user ID comes from auth middleware
+      );
+      res.status(201).json(todo);
     } catch (error) {
       next(error);
     }
   }
-};
 
-module.exports = todoController;
+  // Update todo (ensuring it belongs to user)
+  async update(req, res, next) {
+    try {
+      const todo = await todoService.updateTodo(
+        parseInt(req.params.id),
+        req.user?.id, // Assuming user ID comes from auth middleware
+        req.body
+      );
+      res.json(todo);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // Delete todo (ensuring it belongs to user)
+  async delete(req, res, next) {
+    try {
+      await todoService.deleteTodo(
+        parseInt(req.params.id),
+        req.user?.id // Assuming user ID comes from auth middleware
+      );
+      res.json({ message: 'Todo deleted successfully' });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = new TodoController();
