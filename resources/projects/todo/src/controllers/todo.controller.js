@@ -2,9 +2,9 @@ const todoService = require('../services/todo.service');
 
 class TodoController {
   // Get all todos (optionally filtered by user)
-  async getAll(req, res, next) {
+  async getAllTodos(req, res, next) {
     try {
-      const todos = await todoService.getAllTodos(req.query.userId);
+      const todos = await todoService.getAllTodos(req.query.userId || req.user?.id);
       res.json(todos);
     } catch (error) {
       next(error);
@@ -12,7 +12,7 @@ class TodoController {
   }
 
   // Get todo by ID (optional)
-  async getById(req, res, next) {
+  async getTodoById(req, res, next) {
     try {
       const todo = await todoService.getTodoById(parseInt(req.params.id));
       if (!todo) {
@@ -25,24 +25,24 @@ class TodoController {
   }
 
   // Create todo (with user relationship)
-  async create(req, res, next) {
+  async createTodo(req, res, next) {
     try {
-      const todo = await todoService.createTodo(
-        req.body, 
-        req.user?.id // Assuming user ID comes from auth middleware
-      );
-      res.status(201).json(todo);
+      const newTodo = await todoService.createTodo({
+        ...req.body,
+        userId: req.user.id // Use authenticated user
+      });
+      res.status(201).json(newTodo);
     } catch (error) {
       next(error);
     }
   }
 
   // Update todo (ensuring it belongs to user)
-  async update(req, res, next) {
+  async updateTodo(req, res, next) {
     try {
       const todo = await todoService.updateTodo(
         parseInt(req.params.id),
-        req.user?.id, // Assuming user ID comes from auth middleware
+        req.user.id, // Assuming user ID comes from auth middleware
         req.body
       );
       res.json(todo);
@@ -52,11 +52,11 @@ class TodoController {
   }
 
   // Delete todo (ensuring it belongs to user)
-  async delete(req, res, next) {
+  async deleteTodo(req, res, next) {
     try {
       await todoService.deleteTodo(
         parseInt(req.params.id),
-        req.user?.id // Assuming user ID comes from auth middleware
+        req.user.id // Assuming user ID comes from auth middleware
       );
       res.json({ message: 'Todo deleted successfully' });
     } catch (error) {
