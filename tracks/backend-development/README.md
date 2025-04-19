@@ -24,7 +24,7 @@ By the end of this track, students will be able to:
 
 ## Levels
 1. [Introduction to Backend Development](./1-intro)
-2. [Database Integration](./2-orm-and-auth)
+2. [ORM and Authentication](./2-orm-and-auth)
 3. [Full Project Implementation](./3-ecommerce-full-project)
 
 ## Prerequisites
