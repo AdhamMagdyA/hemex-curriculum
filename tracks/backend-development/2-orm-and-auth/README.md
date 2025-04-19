@@ -1,4 +1,4 @@
-# ORM & Authentication Level
+# ORM & Authentication
 
 ## Level Overview
 Welcome to the second level of our backend journey! Here, we'll learn how to make our applications remember things forever using databases, and how to securely identify users with authentication! 🧙‍♂️🔐
