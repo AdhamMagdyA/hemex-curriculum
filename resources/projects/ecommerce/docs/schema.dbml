@@ -1,0 +1,109 @@
+https://dbdiagram.io/d/ecommerce_subdb-67a26d09263d6cf9a007bfb5
+
+// Users and Authentication
+Table users {
+  user_id integer [primary key, increment]
+  role_id integer [ref: > roles.role_id]
+  email varchar(255) [not null, unique]
+  password varchar(255) [not null]
+  is_verified boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  indexes {
+    email [type: btree]
+  }
+}
+
+Table roles {
+  role_id integer [primary key, increment]
+  name varchar(50) [not null, unique] // 'customer', 'admin'
+}
+
+
+Table user_profiles {
+  profile_id integer [primary key, increment]
+  user_id integer [ref: > users.user_id, unique]
+  first_name varchar(100)
+  last_name varchar(100)
+  phone varchar(20)
+  avatar_url text
+}
+
+// Product Catalog
+Table categories {
+  category_id integer [primary key, increment]
+  name varchar(100) [not null]
+  slug varchar(100) [not null, unique]
+}
+
+Table products {
+  product_id integer [primary key, increment]
+  name varchar(255) [not null]
+  description text
+  price decimal(10,2) [not null]
+  stock_quantity integer [not null, default: 0]
+  category_id integer [ref: > categories.category_id, null]
+  sku varchar(50) [unique]
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  indexes {
+    category_id [type: btree]
+    price [type: btree]
+  }
+}
+
+Table product_images {
+  image_id integer [primary key, increment]
+  product_id integer [ref: > products.product_id]
+  url text [not null]
+  is_primary boolean [default: false]
+  alt_text varchar(255)
+}
+
+// Orders and Payments
+Table orders {
+  order_id integer [primary key, increment]
+  user_id integer [ref: > users.user_id, null]
+  status varchar(20) [not null, default: 'pending'] // pending/paid/shipped/delivered/cancelled
+  total_amount decimal(10,2) [not null]
+  payment_intent_id varchar(100) // Stripe ID
+  shipping_address jsonb
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  indexes {
+    user_id [type: btree]
+    status [type: btree]
+  }
+}
+
+Table order_items {
+  item_id integer [primary key, increment]
+  order_id integer [ref: > orders.order_id]
+  product_id integer [ref: > products.product_id, null]
+  quantity integer [not null]
+  unit_price decimal(10,2) [not null]
+}
+
+Table payments {
+  payment_id integer [primary key, increment]
+  order_id integer [ref: > orders.order_id]
+  amount decimal(10,2) [not null]
+  currency varchar(3) [default: 'USD']
+  status varchar(20) [not null] // succeeded/failed/refunded
+  gateway_id varchar(100) // Stripe charge ID
+  created_at timestamp [default: `now()`]
+  indexes {
+    order_id [type: btree]
+  }
+}
+
+// Notifications
+Table notifications {
+  notification_id integer [primary key, increment]
+  user_id integer [ref: > users.user_id]
+  type varchar(50) [not null] // 'order_confirmation', 'payment_failed'
+  content text [not null]
+  is_read boolean [default: false]
+  created_at timestamp [default: `now()`]
+}

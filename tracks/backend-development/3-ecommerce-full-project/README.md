@@ -15,5 +15,96 @@ By the end of this level, students will:
 - Handle complex business logic
 - Deploy and maintain the application
 
+# Teaching steps (to be converted int lessons):
+
+## 📚 1: Understanding Client Needs
+When working with clients you will need to understand what they need for their project. Interviewing them will help you understand their needs, and based on that we can create the user stories to help us list the features we need for each user of the system.
+
+here is an example of user stories:
+
+### 👥 User Stories
+
+#### Authentication & User Management
+1. As a customer, I want to register with email/OTP so I can access my account securely
+2. As a user, I want to log in with JWT tokens so I can access protected endpoints
+3. As an admin, I want to create users an assign them roles so I can restrict sensitive operations
+4. As a user, I want to update my profile so I can keep my information current
+
+#### Product Catalog
+5. As a customer, I want to browse products so I can shop and buy them  
+6. As a customer, I want to filter by category/price so I can find relevant items
+7. As an admin, I want to CRUD product operations so I can manage inventory
+
+#### Cart & Orders
+9. As a customer, I want a persistent cart so I can save items for later  
+10. As a customer, I want to checkout idempotently so I avoid duplicate charges
+11. As an admin, I want to view all orders so I can manage fulfillment
+
+#### Payments
+13. As a customer, I want to have the option to pay online
+
+#### Notifications
+15. As a customer, I want order confirmation emails so I have purchase records
+16. As an admin, I want payment failure alerts so I can follow up promptly
+
+---
+
+then we can translate the user stories into real features in our app:
+See the [project README](../resources/projects/ecommerce/README.md) for full feature details.
+
+## 📚 2: Building the ERD
+Based on the features build the ERD step by step with students
+[View the database schema](../../../resources/projects/ecommerce/docs/schema.dbml)
+![Database Schema Diagram](../../../resources/projects/ecommerce/docs/ecommerce_subdb.png)
+
+## 📚 3: Building the schema as Prisma shcema
+setup the project structure of the nodejs app and add the prisma schema
+
+### Prisma Schema
+
+1. **Initialize Prisma**:
+   ```bash
+   npm install prisma @prisma/client
+   npx prisma init
+   ```
+
+2. **Configure Database Connection**:
+   Edit `.env` with your database URL:
+   ```
+   DATABASE_URL="mysql://user:password@localhost:3306/db_name"
+   ```
+
+3. **Define Models**:
+   Add models to `prisma/schema.prisma` based on your ERD
+   (Example: User, Product, Order models with relations)
+
+4. **Generate Client**:
+   ```bash
+   npx prisma generate
+   ```
+
+5. **First Migration**:
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+6. **Apply to Production**:
+   ```bash
+   npx prisma migrate deploy
+   ```
+
+explain the difference between production and dev migrate
+(explain migrations in general)
+
+7. **View Data**:
+   ```bash
+   npx prisma studio
+   ```
+
+Key Points:
+- Always run `prisma generate` after schema changes
+- Use `migrate dev` for development, `migrate deploy` for production
+- The schema.prisma file is the single source of truth for your database structure
+
 ## Lessons
 (To be defined)
