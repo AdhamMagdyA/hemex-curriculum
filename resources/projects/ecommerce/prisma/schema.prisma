@@ -11,17 +11,19 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  roleId        Int            @map("role_id")
-  email         String         @unique
-  password      String
-  isVerified    Boolean        @default(false) @map("is_verified")
-  createdAt     DateTime       @default(now()) @map("created_at")
-  updatedAt     DateTime       @default(now()) @map("updated_at")
-  role          Role           @relation(fields: [roleId], references: [id])
-  orders        Order[]
-  notifications Notification[]
-  profile       UserProfile?
+  id                  Int            @id @default(autoincrement())
+  roleId              Int            @map("role_id")
+  email               String         @unique
+  password            String
+  isVerified          Boolean        @default(false) @map("is_verified")
+  resetVerified       Boolean        @default(false)
+  resetVerifiedExpiry DateTime?
+  createdAt           DateTime       @default(now()) @map("created_at")
+  updatedAt           DateTime       @default(now()) @map("updated_at")
+  role                Role           @relation(fields: [roleId], references: [id])
+  orders              Order[]
+  notifications       Notification[]
+  profile             UserProfile?
 
   @@map("users")
 }

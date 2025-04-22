@@ -37,8 +37,6 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 
 ---
 
-
-
 ## 🛠️ Tech Stack
 | Component       | Technology       |
 |-----------------|------------------|
@@ -54,10 +52,17 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 
 ## 📂 Project Structure
 ```bash
+prisma/
 src/
+├── config/       # Configuration files
 ├── controllers/  # Route handlers
+├── errors/       # Custom error classes
+├── middlewares/  # Auth, error handling
 ├── models/       # Database models
 ├── routes/       # API endpoints
 ├── services/     # Business logic
-├── utils/        # Helpers (JWT, email)
-└── tests/        # Integration/unit tests
+├── utils/        # Helpers (API responses)
+└── validations/  # Request validation
+tests/        # Integration/unit tests
+```
+
