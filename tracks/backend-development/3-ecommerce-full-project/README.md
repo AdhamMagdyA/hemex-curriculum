@@ -106,5 +106,32 @@ Key Points:
 - Use `migrate dev` for development, `migrate deploy` for production
 - The schema.prisma file is the single source of truth for your database structure
 
+## 📚 4: Building the Auth Functionalities
+
+1. **login and registration**
+use jwt to generate tokens
+
+2. **add password encryption using bcrypt**
+
+3. **add API validation with joi**
+
+4. **add email verification**
+- prepare the verify-email endpoint that will be used to verify the user's email
+- prepare an email service to send verification emails
+- complete flow of sending emails that direct user to the verify-email
+- don't forget to go through the email configurations (.env variables)
+
+5. **add password reset**
+- using speakeasy to generate OTP
+- prepare the request-password-reset endpoint that will be used to request a password reset
+- prepare the verify-reset-otp endpoint that will be used to verify the OTP
+- prepare the reset-password endpoint that will be used to reset the password based on the resetVerified, resetVerifiedExpiry
+
+**Challenge**: add a rate limiter to limit the OTP requests
+
+6. **add user profile management**
+7. **add user CRUD for admin to manage**
+
+
 ## Lessons
 (To be defined)
