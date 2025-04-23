@@ -5,29 +5,29 @@ const bcrypt = require('bcrypt');
 const speakeasy = require('speakeasy');
 
 const createUser = async (userData) => {
-  try {
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-
-    const user = await prisma.user.create({
-      data: {
-        email: userData.email,
-        password: hashedPassword,
-        isVerified: false,
-        roleId: userData.roleId || 2
+  const hashedPassword = await bcrypt.hash(userData.password, 10);
+  
+  return await prisma.user.create({
+    data: {
+      email: userData.email,
+      password: hashedPassword,
+      isVerified: false,
+      roleId: userData.roleId || 2,
+      profile: {
+        create: {
+          firstName: userData.profile.firstName,
+          lastName: userData.profile.lastName,
+          bio: userData.profile.bio || null,
+          gender: userData.profile.gender || null,
+          address: userData.profile.address || null,
+          dateOfBirth: userData.profile.dateOfBirth || null
+        }
       }
-    });
-    
-    return user;
-  } catch (err) {
-    console.error('User creation error:', err);
-    
-    // Handle Prisma unique constraint violation (duplicate email)
-    if (err.code === 'P2002') {
-      throw new ApiError(400, 'Email already exists');
+    },
+    include: {
+      profile: true
     }
-    
-    throw new ApiError(500, 'User creation failed', false, err.stack);
-  }
+  });
 };
 
 const findUserByEmail = async (email) => {
@@ -99,10 +99,82 @@ const updatePassword = async (email, newPassword) => {
   });
 };
 
+const getAllUsers = async () => {
+  return await prisma.user.findMany({
+    select: {
+      id: true,
+      email: true,
+      isVerified: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+      profile: {
+        select: {
+          firstName: true,
+          lastName: true,
+          bio: true,
+          gender: true,
+          address: true,
+          dateOfBirth: true,
+          profilePicture: true
+        }
+      }
+    }
+  });
+};
+
+const getUserById = async (id) => {
+  if (!id) throw new Error('User ID is required');
+  
+  return await prisma.user.findUnique({
+    where: { 
+      id: Number(id) 
+    },
+    include: { 
+      role: true, 
+      profile: true 
+    }
+  });
+};
+
+const updateUser = async (id, data) => {
+  return await prisma.user.update({
+    where: { id: Number(id) },
+    data,
+    include: { profile: true }
+  });
+};
+
+const deleteUser = async (id) => {
+  return await prisma.user.delete({
+    where: { id: Number(id) }
+  });
+};
+
+const updateUserProfile = async (userId, profileData) => {
+  return await prisma.userProfile.update({
+    where: { userId: Number(userId) },
+    data: {
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      bio: profileData.bio,
+      gender: profileData.gender,
+      address: profileData.address,
+      dateOfBirth: profileData.dateOfBirth,
+      profilePicture: profileData.profilePicture
+    }
+  });
+};
+
 module.exports = {
   createUser,
   findUserByEmail,
   generateResetOTP,
   verifyResetOTP,
-  updatePassword
+  updatePassword,
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+  updateUserProfile
 };

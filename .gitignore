@@ -1,3 +1,4 @@
 # ignore any nodemodules and .env file in the hirarechy
 node_modules
 .env
+uploads

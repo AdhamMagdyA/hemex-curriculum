@@ -133,5 +133,15 @@ use jwt to generate tokens
 7. **add user CRUD for admin to manage**
 
 
+## 📚 5: Building the User CRUD Operations
+1. **add user profile update and get**
+
+2. **add user CRUD for admin to manage**
+
+- ***side activity***: create a script that lists all endpoints existing in the express app using express-list-endpoints
+
+## 📚 6: Building the Product CRUD Operations
+
+
 ## Lessons
 (To be defined)

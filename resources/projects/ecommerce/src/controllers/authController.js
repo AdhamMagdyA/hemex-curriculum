@@ -10,6 +10,22 @@ const prisma = new PrismaClient();
 
 const register = async (req, res, next) => {
   try {
+    const existingUser = await userService.findUserByEmail(req.body.email);
+    
+    if (existingUser) {
+      if (!existingUser.isVerified) {
+        const verificationToken = jwt.sign(
+          { userId: existingUser.id },
+          config.jwtSecret,
+          { expiresIn: '1d' }
+        );
+        
+        await emailService.sendVerificationEmail(existingUser.email, verificationToken);
+        return apiResponse(res, 200, true, null, 'Verification email resent. Please check your email.');
+      }
+      throw new ApiError(400, 'Email already exists');
+    }
+    
     const user = await userService.createUser(req.body);
     
     const verificationToken = jwt.sign(
@@ -22,7 +38,6 @@ const register = async (req, res, next) => {
     
     apiResponse(res, 201, true, { id: user.id }, 'User registered successfully. Please check your email for verification.');
   } catch (err) {
-    console.error('Registration error:', err);
     next(err);
   }
 };
