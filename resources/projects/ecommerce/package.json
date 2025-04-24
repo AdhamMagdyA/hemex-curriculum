@@ -9,7 +9,11 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
-    "list-endpoints": "node scripts/listEndpoints.js"
+    "list-endpoints": "node scripts/listEndpoints.js",
+    "seed": "node prisma/seed.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",

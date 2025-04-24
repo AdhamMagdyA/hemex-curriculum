@@ -7,6 +7,7 @@ const emailService = require('../services/emailService');
 const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const path = require('path');
 
 const register = async (req, res, next) => {
   try {
@@ -85,9 +86,9 @@ const verifyEmail = async (req, res, next) => {
       data: { isVerified: true }
     });
     
-    apiResponse(res, 200, true, null, 'Email verified successfully');
+    res.sendFile(path.join(__dirname, '../templates/email-verified.html'));
   } catch (err) {
-    next(new ApiError(400, 'Invalid or expired verification token'));
+    res.sendFile(path.join(__dirname, '../templates/verification-error.html'));
   }
 };
 
