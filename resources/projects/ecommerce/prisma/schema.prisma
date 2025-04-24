@@ -89,17 +89,18 @@ model ProductImage {
 }
 
 model Order {
-  id              Int         @id @default(autoincrement())
-  userId          Int         @map("user_id")
-  status          String      @default("pending")
-  totalAmount     Decimal     @map("total_amount") @db.Decimal(10, 2)
-  paymentIntentId String?     @map("payment_intent_id")
-  shippingAddress String      @map("shipping_address") @db.VarChar(255)
-  createdAt       DateTime    @default(now()) @map("created_at")
-  updatedAt       DateTime    @default(now()) @map("updated_at")
-  user            User        @relation(fields: [userId], references: [id])
-  items           OrderItem[]
-  payments        Payment[]
+  id                Int         @id @default(autoincrement())
+  userId            Int         @map("user_id")
+  status            String      @default("pending")
+  totalAmount       Decimal     @map("total_amount") @db.Decimal(10, 2)
+  checkoutSessionId String?     @map("checkout_session_id")
+  paymentIntentId   String?     @map("payment_intent_id")
+  shippingAddress   String      @map("shipping_address") @db.VarChar(255)
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @default(now()) @map("updated_at")
+  user              User        @relation(fields: [userId], references: [id])
+  items             OrderItem[]
+  payments          Payment[]
 
   @@map("orders")
 }

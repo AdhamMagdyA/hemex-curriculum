@@ -20,7 +20,7 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 ### **3. Cart & Order System**
 - 🛒 **Redis-Based Cart** (Add/Remove Items)  
 - 💳 **Checkout Flow** (Idempotent API Design)  
-- 📦 **Order State Machine**  (Pending → Paid → Shipped → Delivered)
+- 📦 **Order State Machine**  (Pending → Paid → Failed)
 
 
 ### **4. Payment Integration**

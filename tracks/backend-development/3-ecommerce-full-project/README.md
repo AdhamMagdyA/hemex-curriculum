@@ -165,6 +165,11 @@ use jwt to generate tokens
 - search by name and description of the product
 
 ## 📚 7: Cart and Ordering scenario
+- build a sequence diagram that shows exaclty how the scenario of ordering a product should work
+![Ordering Sequence Diagram](../../../resources/projects/ecommerce/docs/ordering_products_sequence_diagram.png)
+
+- build a stat machine diagram to introduce the concepts of state machine and how to track an entity's states
+![Ordering State Machine Diagram](../../../resources/projects/ecommerce/docs/order_states.png)
 
 ## Lessons
 (To be defined)
