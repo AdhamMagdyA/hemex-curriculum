@@ -1,6 +1,7 @@
 const { registerSchema, loginSchema } = require('../validations/authValidation');
 const { createProductSchema, updateProductSchema, toggleProductStatusSchema, productQuerySchema } = require('../validations/productValidation');
 const { createCategorySchema, updateCategorySchema } = require('../validations/categoryValidation');
+const { addItemSchema, removeItemSchema } = require('../validations/cartValidation');
 const ApiError = require('../errors/ApiError');
 
 const validate = (schema) => (req, res, next) => {
@@ -19,6 +20,8 @@ const validateToggleProductStatus = validate(toggleProductStatusSchema);
 const validateCreateCategory = validate(createCategorySchema);
 const validateUpdateCategory = validate(updateCategorySchema);
 const validateProductQuery = validate(productQuerySchema);
+const validateAddItem = validate(addItemSchema);
+const validateRemoveItem = validate(removeItemSchema);
 
 module.exports = {
   validateRegister,
@@ -28,5 +31,7 @@ module.exports = {
   validateToggleProductStatus,
   validateCreateCategory,
   validateUpdateCategory,
-  validateProductQuery
+  validateProductQuery,
+  validateAddItem,
+  validateRemoveItem
 };

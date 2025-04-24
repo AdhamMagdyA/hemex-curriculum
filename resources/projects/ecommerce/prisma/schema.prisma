@@ -24,6 +24,7 @@ model User {
   orders              Order[]
   notifications       Notification[]
   profile             UserProfile?
+  cart                Cart?
 
   @@map("users")
 }
@@ -141,4 +142,26 @@ model Notification {
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("notifications")
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    Int?       @unique
+  user      User?      @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+
+  @@index([userId])
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  productId Int
+  quantity  Int      @default(1)
+  addedAt   DateTime @default(now())
+
+  @@index([cartId])
 }
