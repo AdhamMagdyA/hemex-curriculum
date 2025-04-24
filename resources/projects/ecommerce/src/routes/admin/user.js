@@ -5,14 +5,14 @@ const auth = require('../../middlewares/auth');
 const upload = require('../../middlewares/uploadMiddleware');
 
 // Admin protected routes
-router.get('/users', auth('admin'), userController.getAllUsers);
-router.get('/users/:id', auth('admin'), userController.getUser);
-router.put('/users/:id', 
+router.get('/', auth('admin'), userController.getAllUsers);
+router.get('/:id', auth('admin'), userController.getUser);
+router.put('/:id', 
   auth('admin'), 
   upload, // handles file upload
   express.urlencoded({ extended: true }), // parses form-data fields
   userController.updateUser
 );
-router.delete('/users/:id', auth('admin'), userController.deleteUser);
+router.delete('/:id', auth('admin'), userController.deleteUser);
 
 module.exports = router;

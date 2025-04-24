@@ -1,4 +1,6 @@
 const { registerSchema, loginSchema } = require('../validations/authValidation');
+const { createProductSchema, updateProductSchema, toggleProductStatusSchema, productQuerySchema } = require('../validations/productValidation');
+const { createCategorySchema, updateCategorySchema } = require('../validations/categoryValidation');
 const ApiError = require('../errors/ApiError');
 
 const validate = (schema) => (req, res, next) => {
@@ -11,8 +13,20 @@ const validate = (schema) => (req, res, next) => {
 
 const validateRegister = validate(registerSchema);
 const validateLogin = validate(loginSchema);
+const validateCreateProduct = validate(createProductSchema);
+const validateUpdateProduct = validate(updateProductSchema);
+const validateToggleProductStatus = validate(toggleProductStatusSchema);
+const validateCreateCategory = validate(createCategorySchema);
+const validateUpdateCategory = validate(updateCategorySchema);
+const validateProductQuery = validate(productQuerySchema);
 
 module.exports = {
   validateRegister,
-  validateLogin
+  validateLogin,
+  validateCreateProduct,
+  validateUpdateProduct,
+  validateToggleProductStatus,
+  validateCreateCategory,
+  validateUpdateCategory,
+  validateProductQuery
 };

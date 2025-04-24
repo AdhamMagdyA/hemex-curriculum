@@ -96,7 +96,7 @@ class AuthService {
     return jwt.sign(
       { userId: user.id, email: user.email }, // Payload
       SECRET,                                 // Secret spell
-      { expiresIn: '1h' }                     // Key expires in 1 hour
+      { expiresIn: '1d' }                     // Key expires in 1 day
     );
   }
 

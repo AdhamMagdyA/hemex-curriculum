@@ -120,6 +120,7 @@ use jwt to generate tokens
 - prepare an email service to send verification emails
 - complete flow of sending emails that direct user to the verify-email
 - don't forget to go through the email configurations (.env variables)
+- prepare a seperate folder that contains html templates for email verification or verification error
 
 5. **add password reset**
 - using speakeasy to generate OTP
@@ -140,8 +141,30 @@ use jwt to generate tokens
 
 - ***side activity***: create a script that lists all endpoints existing in the express app using express-list-endpoints
 
-## 📚 6: Building the Product CRUD Operations
+## 📚 6: Building the Product & Category functionalities
 
+1. **add product CRUD for admin to manage**
+
+2. **add product and category view routes for customer to manage**
+
+- see product and category controller in the project files
+
+3. **validate product and category endpoints**
+- create validation schemas using joi
+- add validation middleware
+- apply validation middleware to the endpoints
+
+***challenge***: make the students detect and handle edge cases that produce error like product or category not found or unique field is being duplicated in db
+
+4. **add functionalities to facilitate navigation**
+- pagination with introducting the concepts of limit and skip
+- sorting by any of the products' fields
+- filtering by category id and a range of price (minPricea and maxPrice)
+
+5. **add search functionality**
+- search by name and description of the product
+
+## 📚 7: Cart and Ordering scenario
 
 ## Lessons
 (To be defined)
