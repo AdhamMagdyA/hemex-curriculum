@@ -171,5 +171,7 @@ use jwt to generate tokens
 - build a stat machine diagram to introduce the concepts of state machine and how to track an entity's states
 ![Ordering State Machine Diagram](../../../resources/projects/ecommerce/docs/order_states.png)
 
+- begin by building the cart management APIs add to cart, remove from cart, and clear cart
+
 ## Lessons
 (To be defined)
