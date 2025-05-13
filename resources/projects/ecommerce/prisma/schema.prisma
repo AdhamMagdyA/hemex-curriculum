@@ -166,4 +166,5 @@ model CartItem {
   addedAt   DateTime @default(now())
 
   @@index([cartId])
+  @@map("cart_items")
 }

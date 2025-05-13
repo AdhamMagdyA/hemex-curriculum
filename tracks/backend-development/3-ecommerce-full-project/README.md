@@ -173,5 +173,11 @@ use jwt to generate tokens
 
 - begin by building the cart management APIs add to cart, remove from cart, and clear cart
 
+- build the order management APIs checkout, get orders, update order status (without payment for now)
+
+## 📚 8: Building the Payment functionality
+
+
+
 ## Lessons
 (To be defined)
