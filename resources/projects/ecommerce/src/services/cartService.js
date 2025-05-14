@@ -1,6 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const { v7: uuid } = require('uuid');
 
 class CartService {
   async getOrCreateCart(userId) {

@@ -177,7 +177,15 @@ use jwt to generate tokens
 
 ## 📚 8: Building the Payment functionality
 
+- register an account to stripe and adding the environment variables
 
+- create the paymentService
+
+- edit the checkout api to handle payment service inside of it
+
+- add an api for paying an old (pending) order
+
+- now the admin can change the status of the order after the payment is done as needed
 
 ## Lessons
 (To be defined)

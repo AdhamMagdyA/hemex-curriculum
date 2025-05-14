@@ -2,6 +2,7 @@ const orderService = require('../services/orderService');
 const cartService = require('../services/cartService');
 const ApiError = require('../errors/ApiError');
 const apiResponse = require('../utils/apiResponse');
+const paymentService = require('../services/paymentService');
 
 class OrderController {
   async checkout(req, res, next) {
@@ -16,7 +17,10 @@ class OrderController {
         req.body.shippingAddress
       );
       
-      apiResponse(res, 201, true, order, 'Order created successfully');
+      // Create a checkout session
+      const session = await paymentService.createCheckoutSession(order.id);
+      
+      return apiResponse(res, 200, true, session, 'Checkout session created successfully');
     } catch (error) {
       next(error);
     }
@@ -43,6 +47,25 @@ class OrderController {
       next(error);
     }
   }
+
+  async payOrder(req, res, next) {
+    try {
+      const { orderId } = req.params;
+      
+      const order = await orderService.getOrderById(orderId);
+      if (order.status !== 'PENDING') {
+        return apiResponse(res, 400, false, null, 'Order status must be PENDING to pay');
+      }
+
+      // Create a checkout session
+      const session = await paymentService.createCheckoutSession(orderId);
+      
+      return apiResponse(res, 200, true, session, 'Checkout session created successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }
 
 module.exports = { OrderController: new OrderController() };

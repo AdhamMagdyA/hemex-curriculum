@@ -7,5 +7,6 @@ const { validateUpdateOrderStatus, validateCheckoutOrder } = require('../middlew
 router.post('/checkout', auth(), validateCheckoutOrder,orderController.OrderController.checkout);
 router.get('/', auth(), orderController.OrderController.getOrders);
 router.patch('/:orderId/status', auth("admin"), validateUpdateOrderStatus, orderController.OrderController.updateStatus);
+router.patch('/:orderId/pay', auth(), orderController.OrderController.payOrder)
 
 module.exports = router;

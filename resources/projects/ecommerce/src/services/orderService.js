@@ -89,6 +89,15 @@ class OrderService {
       orderBy: { createdAt: "desc" },
     });
   }
+
+  
+  async getOrderById(orderId) {
+    return prisma.order.findUnique({
+      where: { id: parseInt(orderId) },
+      include: { items: true },
+    });
+  }
+
 }
 
 module.exports = new OrderService();
