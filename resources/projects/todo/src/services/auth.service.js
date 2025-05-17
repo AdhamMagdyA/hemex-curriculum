@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const prisma = require('../utils/prisma');
+const { jwtSecret } = require('../../../ecommerce/src/config');
 
 class AuthService {
   static async register(userData) {
@@ -27,7 +28,7 @@ class AuthService {
     // 3. Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      process.env.JWT_SECRET || 'your-secret-key',
+      jwtSecret,
       { expiresIn: '1d' }
     );
 
@@ -35,7 +36,7 @@ class AuthService {
   }
 
   static verifyToken(token) {
-    return jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    return jwt.verify(token, jwtSecret);
   }
 
   static async hashPassword(password) {

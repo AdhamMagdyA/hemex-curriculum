@@ -1,5 +1,6 @@
 const { Prisma } = require("@prisma/client");
 const { ValidationError } = require("../errors");
+const { nodeEnv } = require("../../../ecommerce/src/config");
 
 const errorMiddleware = (err, req, res, next) => {
   console.error(err.stack);
@@ -19,7 +20,7 @@ const errorMiddleware = (err, req, res, next) => {
   // Handle other errors
   res.status(500).json({
     message: err.message,
-    error: process.env.NODE_ENV === "development" ? err.message : undefined,
+    error: nodeEnv === "development" ? err.message : undefined,
   });
 };
 

@@ -1,6 +1,7 @@
+const { port } = require('../../ecommerce/src/config');
 const app = require('./app');
 const prisma = require('./utils/prisma');
-const PORT = process.env.PORT || 3000;
+const PORT = port || 3000;
 
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

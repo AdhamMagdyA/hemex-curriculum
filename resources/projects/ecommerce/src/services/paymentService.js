@@ -1,6 +1,8 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const NotificationService = require('./notificationService');
+const { baseUrl, stripeSecretKey } = require('../config');
+const stripe = require('stripe')(stripeSecretKey);
 
 class PaymentService {
 
@@ -25,8 +27,8 @@ class PaymentService {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.BASE_URL}/success`,
-      cancel_url: `${process.env.BASE_URL}/cancel`,
+      success_url: `${baseUrl}/success`,
+      cancel_url: `${baseUrl}/cancel`,
       // shipping_address_collection: {
       //   allowed_countries: ['US', 'CA']
       // },
@@ -40,24 +42,24 @@ class PaymentService {
   }
 
   async handleWebhook(request) {
-    let event = request.body;
-
+    const event = request.body;
     
     try {
       if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
         const orderId = session.metadata.orderId;
-        
-        // Extract payment data from the session
-        const paymentData = {
-          checkoutSessionId: session.id,
-          paymentIntentId: session.payment_intent,
-          status: 'Processing'
-        };
 
-        // Get the order to get total amount and other details
+        // Get the order and user
         const order = await prisma.order.findUnique({
-          where: { id: parseInt(orderId) }
+          where: { id: parseInt(orderId) },
+          include: {
+            user: true,
+            items: {
+              include: {
+                product: true
+              }
+            }
+          }
         });
 
         if (!order) {
@@ -75,11 +77,20 @@ class PaymentService {
           }
         });
 
-        // Update order with payment data
+        // Update order status
         await prisma.order.update({
           where: { id: parseInt(orderId) },
-          data: paymentData
+          data: {
+            checkoutSessionId: session.id,
+            paymentIntentId: session.payment_intent,
+            status: 'Processing'
+          }
         });
+
+        // Send notifications
+        NotificationService.createNotification(order.user.id, 'order_confirmation', `Your order ${order.id} has been confirmed`);
+        await NotificationService.sendOrderConfirmationEmail(order, order.user);
+        await NotificationService.sendAdminNotification(order);
       }
       
       return true;

@@ -191,5 +191,13 @@ use jwt to generate tokens
 
 - use ngrok to test the webhook
 
+- don't use the secret signature of the webhook because it introduces errors and might confuse the students
+
+## 📚 9: Notifications
+
+- create a service that stores notifications in the db and send them through email
+
+- use it in the payment webhook to notify the admin & customer about the payment
+
 ## Lessons
 (To be defined)
