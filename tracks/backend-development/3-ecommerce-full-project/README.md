@@ -187,5 +187,9 @@ use jwt to generate tokens
 
 - now the admin can change the status of the order after the payment is done as needed
 
+- implemenet a webhook to store payment data info after completed (go through stripe webhooks)
+
+- use ngrok to test the webhook
+
 ## Lessons
 (To be defined)

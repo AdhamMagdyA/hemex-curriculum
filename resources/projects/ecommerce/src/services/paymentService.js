@@ -39,6 +39,56 @@ class PaymentService {
     return session;
   }
 
+  async handleWebhook(request) {
+    let event = request.body;
+
+    
+    try {
+      if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const orderId = session.metadata.orderId;
+        
+        // Extract payment data from the session
+        const paymentData = {
+          checkoutSessionId: session.id,
+          paymentIntentId: session.payment_intent,
+          status: 'Processing'
+        };
+
+        // Get the order to get total amount and other details
+        const order = await prisma.order.findUnique({
+          where: { id: parseInt(orderId) }
+        });
+
+        if (!order) {
+          throw new Error('Order not found');
+        }
+
+        // Create payment record
+        await prisma.payment.create({
+          data: {
+            orderId: parseInt(orderId),
+            amount: order.totalAmount,
+            currency: session.currency,
+            status: 'completed',
+            gatewayId: session.payment_intent
+          }
+        });
+
+        // Update order with payment data
+        await prisma.order.update({
+          where: { id: parseInt(orderId) },
+          data: paymentData
+        });
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error processing webhook:', error);
+      throw error;
+    }
+  }
+
 }
 
 module.exports = new PaymentService();

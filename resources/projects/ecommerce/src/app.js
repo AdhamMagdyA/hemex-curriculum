@@ -16,6 +16,7 @@ const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 const adminUserRoutes = require("./routes/admin/user");
 const adminProductRoutes = require("./routes/admin/productRoutes");
 const adminCategoryRoutes = require("./routes/admin/categoryRoutes");
@@ -31,6 +32,7 @@ app.use("/api/admin/products", adminProductRoutes);
 app.use("/api/admin/categories", adminCategoryRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/payment", paymentRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
