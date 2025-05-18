@@ -83,12 +83,11 @@ class PaymentService {
           data: {
             checkoutSessionId: session.id,
             paymentIntentId: session.payment_intent,
-            status: 'Processing'
+            status: 'PROCESSING'
           }
         });
 
         // Send notifications
-        NotificationService.createNotification(order.user.id, 'order_confirmation', `Your order ${order.id} has been confirmed`);
         await NotificationService.sendOrderConfirmationEmail(order, order.user);
         await NotificationService.sendAdminNotification(order);
       }

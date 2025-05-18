@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const ApiError = require("../errors/ApiError");
+const NotificationService = require("./notificationService");
 
 class OrderService {
   async createOrderFromCart(userId, cartId, shippingAddress) {
@@ -11,10 +12,10 @@ class OrderService {
         include: {
           items: {
             include: {
-              product: true
-            }
-          }
-        }
+              product: true,
+            },
+          },
+        },
       });
 
       if (!cart || !cart.items?.length) {
@@ -25,7 +26,11 @@ class OrderService {
       let totalAmount = 0;
       for (const item of cart.items) {
         if (!item.product?.price) {
-          throw new ApiError(400, `Product ${item.productId} has no price`, false);
+          throw new ApiError(
+            400,
+            `Product ${item.productId} has no price`,
+            false
+          );
         }
         totalAmount += Number(item.product.price) * item.quantity;
       }
@@ -38,14 +43,14 @@ class OrderService {
           totalAmount,
           shippingAddress,
           items: {
-            create: cart.items.map(item => ({
+            create: cart.items.map((item) => ({
               productId: item.productId,
               quantity: item.quantity,
-              unitPrice: item.product.price
-            }))
-          }
+              unitPrice: item.product.price,
+            })),
+          },
         },
-        include: { items: true }
+        include: { items: true },
       });
 
       // Clear cart
@@ -76,28 +81,36 @@ class OrderService {
       );
     }
 
-    return prisma.order.update({
+    const orderUpdated = await prisma.order.update({
       where: { id: parseInt(orderId) },
       data: { status: newStatus },
+      include: { user: true, items: { include: { product: true } } },
     });
+
+    if (newStatus === "SHIPPED") {
+      NotificationService.sendOrderShippedEmail(
+        orderUpdated,
+        orderUpdated.user
+      );
+    }
+
+    return orderUpdated;
   }
 
   async getOrders(userId) {
     return prisma.order.findMany({
       where: { userId },
-      include: { items: true },
+      include: { items: { include: { product: true } } },
       orderBy: { createdAt: "desc" },
     });
   }
 
-  
   async getOrderById(orderId) {
     return prisma.order.findUnique({
       where: { id: parseInt(orderId) },
-      include: { items: true },
+      include: { items: { include: { product: true } } },
     });
   }
-
 }
 
 module.exports = new OrderService();

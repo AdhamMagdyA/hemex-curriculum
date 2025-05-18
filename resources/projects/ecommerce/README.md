@@ -28,8 +28,8 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 - 🔔 **Webhook Handling** (Payment Status Updates)  
 
 ### **5. Notifications**
-- 📧 **Transactional Emails** (Order Confirmations)  
-- ⚠️ **Admin Alerts** (Failed Payments)  
+- 📧 **Transactional Emails** (Order Confirmations, Order Shipped)  
+- ⚠️ **Admin Notifications** (Order Paid)  
 
 ### **6. DevOps Ready**
 - 📊 **Logging** (ELK Stack)  
