@@ -132,7 +132,6 @@ class NotificationService {
           },
         },
       });
-      console.log(admins);
       // Create notification for each admin
       for (const admin of admins) {
         await this.createNotification(

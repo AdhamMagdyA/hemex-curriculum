@@ -32,8 +32,8 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 - ⚠️ **Admin Notifications** (Order Paid)  
 
 ### **6. DevOps Ready**
-- 📊 **Logging** (ELK Stack)  
-- 🚨 **Monitoring** (Prometheus/Grafana)  
+- 📦 **Dockerize the app** (Dockerfile)
+- 📊 **Logging & Monitoring** (ELK Stack)
 
 ---
 
@@ -47,6 +47,55 @@ A full-featured e-commerce backend built with Node.js, Express, and PostgreSQL. 
 | **Payments**    | Stripe API       |
 | **Emails**      | SendGrid/Mailgun |
 | **Search**      | Elasticsearch    |
+
+---
+
+## 🚀 Getting Started
+
+### 🐳 Docker Setup
+
+1. **Build and Run with Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Access Services**
+   - Application: http://localhost:3000
+   - PostgreSQL: localhost:5432
+   - Redis: localhost:6379
+   - Kibana (optional): http://localhost:5601
+
+3. **Development Mode**
+   For development with hot-reloading:
+   ```bash
+   docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+   ```
+
+4. **Stop Services**
+   ```bash
+   docker-compose down
+   ```
+
+### 📦 Local Setup (Alternative)
+
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Set Up Environment Variables**
+   - Copy `.env.example` to `.env`
+   - Update the values in `.env` with your configuration
+
+3. **Run Database Migrations**
+   ```bash
+   npx prisma migrate dev
+   ```
+
+4. **Start the Application**
+   ```bash
+   npm run dev
+   ```
 
 ---
 
