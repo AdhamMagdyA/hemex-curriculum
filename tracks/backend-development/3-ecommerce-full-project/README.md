@@ -27,7 +27,7 @@ here is an example of user stories:
 #### Authentication & User Management
 1. As a customer, I want to register with email/OTP so I can access my account securely
 2. As a user, I want to log in with JWT tokens so I can access protected endpoints
-3. As an admin, I want to create users an assign them roles so I can restrict sensitive operations
+3. As an admin, I want to create users and assign them roles so I can restrict sensitive operations
 4. As a user, I want to update my profile so I can keep my information current
 
 #### Product Catalog
@@ -201,6 +201,14 @@ use jwt to generate tokens
 
 - use it in the order update to notify the user about the delivery
 
+
+## 📚 10: Dockerizing the app
+
+- introduction about docker and explain the docker concepts
+
+- dockerize the app and database
+
+- deploy the app to a free cloud platform like gcp or aws
 
 ## Lessons
 (To be defined)
