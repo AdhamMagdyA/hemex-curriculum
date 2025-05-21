@@ -56,6 +56,11 @@ function makeIceCream(flavor, toppings) {
     return `${flavor} ice cream with ${toppings}`;
 }
 
+// Arrow function - like a recipe
+const makeIceCream = (flavor, toppings) => {
+    return `${flavor} milkshake with ${toppings}`;
+}
+
 // Arrow function - shorter way to write recipes
 const makeShake = (flavor) => `${flavor} milkshake`;
 
@@ -83,7 +88,15 @@ for (let i = 0; i < 5; i++) {
     console.log(`Count: ${i}`);
 }
 
+// While loop - doing things multiple times
+let i = 0;
+while (i < 5) {
+    console.log(`Count: ${i}`);
+    i++;
+}
+
 // forEach - doing something with each item
+const colors = ['red', 'blue', 'green'];
 colors.forEach(color => {
     console.log(`I love ${color}!`);
 });
