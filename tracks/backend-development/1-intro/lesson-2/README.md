@@ -72,16 +72,29 @@ console.log('Can take next order!'); // Doesn't have to wait!
 ```
 todo-app/
 ├── src/
-│   ├── controllers/
-│   │   └── todoController.js    # Handle todo operations
-│   ├── models/
-│   │   └── todo.js              # Todo data structure
-│   ├── routes/
-│   │   └── todoRoutes.js        # API endpoints
-│   └── services/
-│       └── todoService.js       # Business logic
-└── app.js                       # Main application file
+│   ├── controllers/            # Request handlers
+│   ├── middlewares/             # Express middleware
+│   ├── routes/                  # API route definitions
+│   ├── services/                # Business logic
+│   ├── errors/                  # Custom error classes
+│   ├── utils/                   # Utility functions
+│   ├── app.js                   # Express app configuration
+│   └── server.js                # Server startup
+├── prisma/                      # Database ORM
+│   └── schema.prisma            # Database schema
+├── tests/                       # Test files
+├── .env                         # Environment variables
+├── .env.example                 # Example environment variables
+└── package.json                 # Project dependencies and scripts
 ```
+
+#### teaching note
+
+- the prisma file can also be refered as the models of the application
+
+- explain the concept of models and what is the mapping of objects to db tables
+
+- gradually build the todo app with simple APIs at the beginning (don't go deep in prisma relationships as it has another section specified for it, don't craete middlewares as they are also being covered in the next lesson)
 
 ### 1. Main Application (app.js)
 ```javascript
@@ -104,60 +117,95 @@ app.listen(PORT, () => {
 });
 ```
 
-### 2. Todo Model (src/models/todo.js)
-```javascript
-class Todo {
-    constructor(task) {
-        this.id = Date.now();  // Like giving each dish a unique number
-        this.task = task;      // What needs to be done
-        this.completed = false; // Is it done?
-        this.createdAt = new Date();
-    }
+### 2. Todo Model (Prisma Schema)
+
+In Prisma, models are defined in the schema file and represent database tables. Here's how our Todo model looks in the Prisma schema (prisma/schema.prisma):
+
+```prisma
+model Todo {
+  id        Int      @id @default(autoincrement())
+  task      String
+  completed Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
 }
 
-module.exports = Todo;
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  todos     Todo[]
+  createdAt DateTime @default(now())
+}
 ```
 
-### 3. Todo Service (src/services/todoService.js)
+This is equivalent to defining a JavaScript class but is specifically for database modeling. The key differences from a plain JavaScript class are:
+
+1. **Database Mapping**: Each model maps directly to a database table
+2. **Relationships**: Defined using `@relation` (like `user` in Todo)
+3. **Type Safety**: Strong typing for all fields
+4. **Default Values**: Set with `@default()`
+5. **Database Constraints**: Like `@id`, `@unique` are database-level validations
+
+In your JavaScript code, you don't need to write the model class manually - Prisma Client generates TypeScript types and database access methods based on this schema.
+
+### 3. Todo Service (src/services/todo.service.js)
 ```javascript
+const prisma = require('../utils/prisma');
+const { ValidationError } = require('../errors');
+
 class TodoService {
-    constructor() {
-        this.todos = [];  // Our menu of todos!
+  // Get all todos (optionally filtered by user)
+  async getAllTodos(userId) {
+    const where = userId ? { userId } : {};
+    return prisma.todo.findMany({ where });
+  }
+
+  // Get todo by id
+  async getTodoById(id) {
+    return await prisma.todo.findUnique({
+      where: { id: parseInt(id) }
+    });
+  }
+
+  // Create todo (with user relationship)
+  async createTodo(todoData) {
+    if (!todoData.task || typeof todoData.task !== 'string') {
+      throw new ValidationError('Task is required and must be a non-empty string');
+    }
+    
+    if (!todoData.userId) {
+      throw new ValidationError('User ID is required');
     }
 
-    getAllTodos() {
-        return this.todos;  // Show all dishes
-    }
+    return prisma.todo.create({
+      data: {
+        task: todoData.task,
+        completed: todoData.completed || false,
+        userId: todoData.userId
+      }
+    });
+  }
 
-    addTodo(task) {
-        const todo = new Todo(task);  // Create a new dish
-        this.todos.push(todo);        // Add to our menu
-        return todo;
-    }
+  // Update todo (ensuring it belongs to user)
+  async updateTodo(id, userId, todoData) {
+    return prisma.todo.update({
+      where: { id, userId },
+      data: todoData
+    });
+  }
 
-    getTodoById(id) {
-        return this.todos.find(todo => todo.id === id);  // Find a specific dish
-    }
-
-    updateTodo(id, updates) {
-        const todo = this.getTodoById(id);
-        if (todo) {
-            Object.assign(todo, updates);  // Update the dish
-            return todo;
-        }
-        return null;
-    }
-
-    deleteTodo(id) {
-        const index = this.todos.findIndex(todo => todo.id === id);
-        if (index !== -1) {
-            return this.todos.splice(index, 1)[0];  // Remove from menu
-        }
-        return null;
-    }
+  // Delete todo (ensuring it belongs to user)
+  async deleteTodo(id, userId) {
+    return prisma.todo.delete({
+      where: { id, userId }
+    });
+  }
 }
 
-module.exports = new TodoService();  // Create one service for everyone to use
+module.exports = new TodoService();
 ```
 
 ### 4. Todo Controller (src/controllers/todoController.js)
