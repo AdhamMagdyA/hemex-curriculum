@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Database-Relationships-Connecting-Our-Todo-Universe--k4q0ktzr2nmwbiu)**
+
 # Database Relationships: Connecting Our Todo Universe! 🌌
 
 ## Lesson Overview
@@ -63,6 +65,8 @@ model Class {
 }
 ```
 
+**after teaching the different relationships, apply them to the todo app**
+
 ## Part 2: Querying Related Data
 
 ### Including Related Records
@@ -92,6 +96,8 @@ const newUser = await prisma.user.create({
 });
 ```
 
+**after teaching the nested queries, apply them to the todo app**
+
 ## Part 3: When Magic Needs Help - Raw Queries
 
 ```javascript
@@ -101,10 +107,11 @@ const results = await prisma.$queryRaw`
   WHERE createdAt > NOW() - INTERVAL 1 DAY
 `;
 ```
+**no need to apply the raw queries, just show them**
 
 ## Exercises
 
-1. Create teacher/student relationships
+1. Create teacher/student relationships (ask the children to build a project with db schema containing this relationship)
 3. Try a complex raw query
 
 ## Additional Resources
