@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/From-Memory-to-Database-Upgrading-Our-Todo-App--yak08cghhojbhv5)**
+
 # From Memory to Database: Upgrading Our Todo App! 🔄
 
 ## Lesson Overview
