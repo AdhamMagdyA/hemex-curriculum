@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-the-Prisma-Schema-The-Digital-Blueprint--z7txq23s4e2xglz)**
+
 # Building the Prisma Schema: The Digital Blueprint 🏗️
 
 ## Lesson Overview
@@ -20,6 +22,8 @@ Students will learn:
 - Start with simple models
 - Build complexity gradually
 - Use practical examples
+
+**Note: always refer to the documentation while working with prisma to teach the students who to leverage from the documentation**
 
 ## Part 1: Setting Up Prisma - The Blueprint Tools 🛠️
 
