@@ -20,7 +20,7 @@ const errorMiddleware = (err, req, res, next) => {
   // Handle other errors
   res.status(500).json({
     message: err.message,
-    error: nodeEnv === "development" ? err.message : undefined,
+    error: nodeEnv === "development" ? err : undefined,
   });
 };
 
