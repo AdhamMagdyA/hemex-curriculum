@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-Authentication-Securing-Your-Digital-Store--1mezn286267tw1d)**
+
 # Building Authentication: Securing Your Digital Store 🔐
 
 ## Lesson Overview
