@@ -209,6 +209,3 @@ use jwt to generate tokens
 - dockerize the app and database
 
 - deploy the app to a free cloud platform like gcp or aws
-
-## Lessons
-(To be defined)
