@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-User-Management-The-Digital-Team--hmep9sytj2wgu1p)**
+
 # Building User Management: The Digital Team 🏆
 
 ## Lesson Overview
@@ -83,13 +85,10 @@ Students will learn:
 
 1. **Express List Endpoints**
    - Create script to list all endpoints
-   - Document routes
    - Test endpoints
 
 2. **API Documentation**
-   - Add Swagger/OpenAPI
-   - Document authentication
-   - Describe endpoints
+   - Use postman to test and document endpoints
 
 ### Best Practices
 
@@ -97,13 +96,6 @@ Students will learn:
 - Implement proper error handling
 - Use middleware for security
 - Document all endpoints
-
-## Real-World Application
-
-- Create a group activity where students test different user roles
-- Practice implementing admin features
-- Test API endpoints
-- Document the system
 
 ## Next Steps
 
