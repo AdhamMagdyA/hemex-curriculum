@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-Cart-Order-Management-The-Digital-Shopping-Experience--y8lh853u4rei8b7)**
+
 # Building Cart & Order Management: The Digital Shopping Experience 🛒
 
 ## Lesson Overview
@@ -20,7 +22,9 @@ Students will learn:
 - Start with basic cart functionality
 - Add order management
 - Use sequence diagrams
-- Explain state machines
+- Explain state machines (diagram)
+- don't implement payment in the checkout in this session
+- payments are handled in the next session
 
 ## Part 1: Cart Management - The Digital Shopping Cart 🛒
 
@@ -62,6 +66,7 @@ Students will learn:
    ```
 
 ## Part 3: State Machine - The Digital Workflow 🔄
+![order sequence diagram](../../../../resources/projects/ecommerce/docs/order_states.png)
 
 ### Key Concepts
 
@@ -77,6 +82,7 @@ Students will learn:
    - Log changes
 
 ## Part 4: Sequence Diagram - The Digital Flowchart 📊
+![order sequence diagram](../../../../resources/projects/ecommerce/docs/ordering_products_sequence_diagram.png)
 
 ### Key Steps
 
@@ -112,7 +118,6 @@ Students will learn:
 - Create a group activity where students test the checkout process
 - Practice implementing state transitions
 - Test error scenarios
-- Optimize performance
 
 ## Next Steps
 
