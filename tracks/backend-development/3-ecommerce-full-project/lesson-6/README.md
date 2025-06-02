@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-Product-Category-Management-The-Digital-Store-y19cxwm8i4iuymf)**
+
 # Building Product & Category Management: The Digital Store 🏪
 
 ## Lesson Overview
@@ -113,6 +115,11 @@ Students will learn:
 - Practice implementing validation
 - Test search and filtering
 - Optimize queries
+
+## Assignment
+
+- add sub-category to the category
+- link it with products
 
 ## Next Steps
 
