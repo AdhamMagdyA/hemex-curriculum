@@ -1,3 +1,5 @@
+**[presentation](https://gamma.app/docs/Building-Payment-Integration-The-Digital-Wallet--1z5egjob3854c3m)**
+
 # Building Payment Integration: The Digital Wallet 💳
 
 ## Lesson Overview
@@ -19,8 +21,7 @@ Students will learn:
 - Use the "digital wallet" analogy
 - Start with basic payment setup
 - Add webhook handling
-- Use practical examples
-- Emphasize security
+- Emphasize security (make students brainstorp for possible security problems)
 
 ## Part 1: Stripe Setup - The Digital Payment Gateway 🏦
 
@@ -62,6 +63,8 @@ Students will learn:
 
 ### Key Features
 
+**instructor note: always refer to the stripe documentation to make the students able to look for information they need on their own**
+
 1. **Webhook Setup**
    ```javascript
    // POST /api/webhooks/stripe
@@ -73,12 +76,13 @@ Students will learn:
 2. **Event Handling**
    - Payment succeeded
    - Payment failed
-   - Refunds
-   - Disputes
+   - we will not handle refunds here
 
 ## Part 4: Payment States - The Digital Transaction Flow 🔄
 
 ### Key States
+
+**instructor note: assignment for students to create the state diagram of this payment states**
 
 1. **Payment States**
    ```javascript
@@ -94,13 +98,6 @@ Students will learn:
    - Handle payment success
    - Handle payment failure
    - Handle refunds
-
-### Best Practices
-
-- Always verify webhook signatures
-- Handle payment failures gracefully
-- Implement proper error handling
-- Log all transactions
 
 ## Real-World Application
 
