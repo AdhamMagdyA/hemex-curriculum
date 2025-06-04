@@ -1,3 +1,4 @@
+**[presentation](https://gamma.app/docs/Building-a-Notification-System-The-Digital-Messenger--s7d0yxch37123qs)**
 # Building Notification System: The Digital Messenger 🔔
 
 ## Lesson Overview
@@ -19,20 +20,18 @@ Students will learn:
 - Use the "digital messenger" analogy
 - Start with basic notifications
 - Add email integration
-- Use practical examples
-- Emphasize reliability
 
 ## Part 1: Notification Service - The Digital Message Center 📬
 
 ### Key Features
 
+**instructor note: create only order_confirmation and let students create the order_shipped**
+
 1. **Notification Types**
    ```javascript
    const notificationTypes = {
      ORDER_CONFIRMATION: 'order_confirmation',
-     PAYMENT_SUCCESS: 'payment_success',
-     PAYMENT_FAILURE: 'payment_failure',
-     ORDER_UPDATE: 'order_update'
+     ORDER_SHIPPED: 'order_shipped'
    };
    ```
 
@@ -41,7 +40,7 @@ Students will learn:
    // Store notifications in database
    - Track status
    - Store metadata
-   - Handle retries
+   - Show queue of notifications in frontend
    ```
 
 ## Part 2: Email Integration - The Digital Postal Service 📧
@@ -50,9 +49,7 @@ Students will learn:
 
 1. **Email Templates**
    - Order confirmation
-   - Payment success
-   - Payment failure
-   - Order status updates
+   - Order shipped
 
 2. **Email Service**
    ```javascript
@@ -107,12 +104,10 @@ Students will learn:
 - Handle retries
 - Log all notifications
 
-## Real-World Application
+## Assignment
 
-- Create a group activity where students test notification scenarios
-- Practice email integration
-- Test error handling
-- Implement logging
+- extract emails in an external template
+- add functions to notifications service that (getUnreadNotifications, markAsRead)
 
 ## Next Steps
 
