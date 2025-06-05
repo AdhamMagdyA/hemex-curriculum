@@ -1,3 +1,4 @@
+**[presentation](https://gamma.app/docs/Dockerizing-Your-App-The-Digital-Container-Ship--6kvjb1ihyd08rs0)**
 # Dockerizing the Application: The Digital Container 🐳
 
 ## Lesson Overview
@@ -11,15 +12,14 @@ Welcome to the deployment phase! In this lesson, we'll containerize our applicat
 Students will learn:
 - Docker concepts and terminology
 - Containerize Node.js app
-- Containerize database
 - Deploy to cloud platform
 
 ### Teaching Strategy
 
 - Use the "container ship" analogy
 - Start with basic Docker concepts
-- Add containerization gradually
-- Use practical examples
+- contenarize the app
+- explain why docker is important
 - Emphasize deployment best practices
 
 ## Part 1: Docker Concepts - The Digital Shipping Yard 🚀
@@ -31,6 +31,7 @@ Students will learn:
    - Containers
    - Volumes
    - Networks
+   - explain that docker is transfaring not just your app but also your whole environment to another machine
 
 2. **Dockerfile**
    ```dockerfile
@@ -62,6 +63,14 @@ Students will learn:
    ```
 
 ## Part 3: Database Container - The Digital Storage Container 📦
+
+- this part is just for them to know it exists, but it is kind of complicated for kids to apply. so it might be optional if you see it is appropriate to explain
+
+- the goal of this session is to teach them how to deal with docker using the docker file
+
+- managing multiple services using docker compose is advanced
+
+- currently we are handling database manually in our local machine (or server)
 
 ### Key Features
 
@@ -110,12 +119,10 @@ Students will learn:
 
 - Always use multi-stage builds
 - Keep containers small
-- Use volumes for persistence
 - Implement proper networking
 
 ## Real-World Application
 
-- Create a group activity where students test containerization
 - Practice cloud deployment
 - Test scalability
 - Implement monitoring
@@ -125,8 +132,8 @@ Students will learn:
 Congratulations! You've completed the e-commerce full project course. You've built a complete e-commerce platform from requirements to deployment. You're now ready to:
 
 1. Build your own e-commerce platforms
-2. Deploy applications to production
-3. Manage databases and APIs
-4. Implement security and payment systems
+2. Manage databases and APIs
+3. Implement security and payment systems
+4. Deploy applications to production
 
 Keep practicing and building! 🚀
