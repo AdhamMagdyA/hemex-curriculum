@@ -15,7 +15,7 @@ By the end of this level, students will:
 - Handle complex business logic
 - Deploy and maintain the application
 
-# Teaching steps (to be converted int lessons):
+# Teaching steps (to be converted into lessons):
 
 ## 📚 1: Understanding Client Needs
 When working with clients you will need to understand what they need for their project. Interviewing them will help you understand their needs, and based on that we can create the user stories to help us list the features we need for each user of the system.
@@ -206,6 +206,6 @@ use jwt to generate tokens
 
 - introduction about docker and explain the docker concepts
 
-- dockerize the app and database
+- dockerize the app
 
 - deploy the app to a free cloud platform like gcp or aws

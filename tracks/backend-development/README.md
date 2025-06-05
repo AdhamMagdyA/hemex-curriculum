@@ -1,55 +1,87 @@
 # Backend Development Track
 
-This track covers server-side programming, database integration, and API development using modern JavaScript frameworks.
+Master server-side programming, database integration, and API development using Node.js and modern JavaScript frameworks.
 
 ## Overview
-This track focuses on building robust backend applications using Node.js, covering everything from fundamentals to advanced concepts like authentication, ORM, and real-world project implementation.
+This comprehensive track takes you from backend fundamentals to building production-ready applications. You'll progress through three major sections, culminating in a full e-commerce project implementation.
 
-## Project-Based Learning
+## Learning Journey
 
-The curriculum uses a [Todo API](../../resources/projects/todo) project that evolves through each level to demonstrate:
-- Basic CRUD operations (Level 1)
-- Database integration (Level 2)
-- Authentication (Level 3)
-- Advanced patterns (Level 4)
+### 1. Introduction to Backend Development
+- **Lesson 1**: Node.js Fundamentals & Core Modules
+- **Lesson 2**: Express.js & RESTful API Design & Backend Projects Structure
+- **Lesson 3**: Error Handling & Middlewares & Version control
+
+### 2. ORM and Authentication
+- **Lesson 1**: Database Design & Prisma ORM
+- **Lesson 2**: Authentication & Authorization
+- **Lesson 3**: Advanced Querying & Relationships
+
+### 3. E-commerce Full Project
+- **Lessons 1-10**: Comprehensive e-commerce API covering:
+  - Product & Category Management
+  - User Authentication & Authorization
+  - Shopping Cart & Order Processing
+  - Composing ERD & UML Diagrams
+  - Payment Integration
+  - Email Notifications
+  - File Uploads
+  - Advanced Search & Filtering
+  - API Documentation
+  - Testing & Deployment
 
 ## Track Objectives
-By the end of this track, students will be able to:
-- Build production-ready Node.js applications
-- Implement secure authentication systems
-- Work with databases using modern ORMs
-- Create middleware and handle request validation
-- Implement role-based access control
-- Build and deploy full e-commerce solutions
-
-## Levels
-1. [Introduction to Backend Development](./1-intro)
-2. [ORM and Authentication](./2-orm-and-auth)
-3. [Full Project Implementation](./3-ecommerce-full-project)
+By completing this track, you'll be able to:
+- Gather requiremments from clients
+- Draw analysis diagrams (ERD, Usecase Diagrams, Sequence Diagrams, etc.)
+- Design and implement RESTful APIs using Node.js and Express
+- Work with SQL databases using Prisma ORM
+- Implement secure authentication and authorization
+- Handle file uploads and email notifications
+- Process payments and manage orders (using stirpe payment gateway)
+- Write clean, maintainable, and well-documented code
+- Deploy and scale backend applications
 
 ## Prerequisites
-- JavaScript fundamentals
-- Basic understanding of HTTP
-- Node.js environment setup
-- Basic understanding of HTTP and REST APIs
-- Familiarity with npm and package management
-- Basic database concepts
+- Solid understanding of JavaScript (ES6+)
+- Basic knowledge of Node.js and npm
+- Understanding of REST API concepts
+- Familiarity with databases (SQL preferred)
+- Git version control basics
 
-## Duration
-- 10 weeks (recommended)
-- 3-5 weeks per level
-- 1 lesson per week
+## Tech Stack
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MySQL with Prisma ORM
+- **Authentication**: JWT
+- **Testing**: Jest
+- **Documentation**: OpenAPI/Swagger
+
+## Getting Started
+1. Install Node.js (v18+ recommended)
+2. Set up MySQL database (XAMPP or standalone)
+3. Install dependencies: `npm install`
+4. Configure environment variables (refer to `.env.example`)
+5. Run database migrations: `npx prisma migrate dev`
+6. Start the development server: `npm run dev`
 
 ## Resources
-- [Example Project Code](../../resources/projects/todo)
-- [Postman Collection](../../resources/projects/todo/docs/Todo-API.postman_collection.json)
-- Postman/Insomnia for API testing
-- Xampp (for MySQL)
-- Git
+- [Prisma Documentation](https://www.prisma.io/docs/)
+- [Express.js Guide](https://expressjs.com/)
+- [JWT Authentication](https://jwt.io/introduction/)
 
-## Learning Path Progression
-1. Review & strengthen Node.js fundamentals
-2. Learn database integration with Prisma ORM
-3. Master authentication and security
-4. Implement advanced concepts (middleware, RBAC)
-5. Apply all concepts in a real-world e-commerce project
+## Project Structure
+```
+backend/
+├── src/
+│   ├── config/       # Configuration files
+│   ├── controllers/   # Route controllers
+│   ├── middleware/    # Custom middleware
+│   ├── models/        # Database models
+│   ├── routes/        # API routes
+│   ├── services/      # Business logic
+│   ├── utils/         # Helper functions
+│   └── app.js         # Express app setup
+├── prisma/           # Prisma schema and migrations
+└── tests/            # Test files
+```
